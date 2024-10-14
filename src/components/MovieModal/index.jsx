@@ -1,6 +1,8 @@
-/* eslint-disable react/prop-types */ 
+
 import { imageBasePath } from '../../constant';
 import './MovieModal.css';
+import useOnClickOutside from '../../hooks/useOnClickOutside';
+import React, { useRef } from 'react';
 
 const MovieModal = ({
     backdrop_path,
@@ -12,10 +14,17 @@ const MovieModal = ({
     vote_average,
     setModalOpen
 }) => {
+
+    const ref = useRef(null);
+
+    useOnClickOutside(ref, () => {
+        setModalOpen(false);
+    })
+    
   return (
     <div className="presentation" role="presentation">
         <div className="wrapper-modal">
-          <div className="modal"> 
+          <div className="modal" ref={ref}> 
 
             <span 
                 onClick={() => setModalOpen(false)}
